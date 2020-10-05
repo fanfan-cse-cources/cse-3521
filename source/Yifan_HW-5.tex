@@ -1,0 +1,152 @@
+\documentclass[11pt, oneside]{article}      % use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                       % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                      % ... or a4paper or a5paper or ...
+%\geometry{landscape}                       % Activate for rotated page geometry
+%\usepackage[parfill]{parskip}              % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}                       % Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+% TeX will automatically convert eps --> pdf in pdflatex
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{ulem}
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}[hang]{\bfseries}{}{0pt}{#1 \thesection}[]
+\titleformat{\subsection}[hang]{\large\itshape}{}{0pt}{#1:}[]
+
+\usepackage[shortlabels]{enumitem}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\title{CSE 3521 - Homework 05}
+\author{Yifan Yao}
+%\date{}                            % Activate to display a given date or no date
+
+\begin{document}
+%\maketitle
+%\section{}
+%\subsection{}
+
+\begin{flushleft}
+Yifan Yao \\
+CSE 3521 \\
+Homework 05 \\
+\end{flushleft}
+
+\section {Problem}
+\begin{enumerate}[a. ] % (a), (b), (c), ...
+  \item Every student takes both MATH and CHEMISTRY.
+  \begin{align*}
+    &\text{P: Student(x)} \\
+    &\text{Q: Takes(x, MATH)} \\
+    &\text{R: Takes(x, CHEMISTRY)} \\
+    &\forall x, \text{Student(x)}\Rightarrow \left(\text{Takes(x, MATH)}\land \text{Takes(x, CHEMISTRY)}\right) \\
+    \equiv &\forall x, P \Rightarrow \left(Q\land R\right) \\
+    \equiv &\forall x, \neg P \lor \left(Q\land R\right) \\
+    \equiv &\neg \neg \left(\forall x, \neg P \lor \left(Q\land R\right)\right) \\
+    \equiv &\neg \left(\exists x, P \land\neg \left(Q\land R\right)\right) \\
+    \equiv &\neg \left(\exists x, P \land\left(\neg Q\lor \neg R\right)\right) \\
+    \equiv &\neg \exists x, P \land \left(\neg Q\lor \neg R\right) \\
+    \equiv &\neg \exists x, \text{Student(x)} \land \left(\neg\text{Takes(x, MATH)}\lor\neg \text{Takes(x, CHEMISTRY)}\right)
+  \end{align*}
+  \item No person enjoys a non-intelligent robot.
+  \begin{align*}
+    &\text{P: Person(x)} \\
+    &\text{Q: Robot(y)} \\
+    &\text{R: Intelligent(y)} \\
+    &\text{S: Enjoys(x, y)} \\
+    &\neg \exists x, y,\left(\text{Person(x)}\land \text{Robot(y)}\land \neg \text{Intelligent(y)}\right)\land \text{Enjoys(x, y)} \\
+    \equiv &\neg \exists x, y,\left(P\land Q\land \neg R\right)\land S \\
+    \equiv &\forall x, y, \neg \left(\left(P\land Q\land\neg R\right)\land S\right) \\
+    \equiv &\forall x, y, \left(\neg\left(P\land Q\land\neg R\right)\lor \neg S\right) \\
+    \equiv &\forall x, y, \left(P\land Q\land\neg R\right)\Rightarrow\neg S \\
+    \equiv &\forall x, y, \left(\text{Person(x)}\land \text{Robot(y)}\land\neg \text{Intelligent(y)}\right)\Rightarrow \neg\text{Enjoys(x, y)} \\
+  \end{align*}
+\end{enumerate}
+
+\section {Problem}
+\begin{enumerate}[1. ] % (a), (b), (c), ...
+  \item Ostrich (True)
+    \begin{itemize}
+      \item \sout{ANIMAL is a bird}
+        \begin{itemize}
+          \item \sout{ANIMAL has feathers (F1)} OR (ANIMAL flies AND \sout{ANIMAL lays eggs (F2)})
+        \end{itemize}
+      \item \sout{ANIMAL does not fly (F3)}
+      \item \sout{ANIMAL has long legs (F6)}
+      \item \sout{ANIMAL has long neck (F7)}
+      \item \sout{ANIMAL is black and white (F4)}
+    \end{itemize}
+  \item Penguin (True)
+    \begin{itemize}
+      \item \sout{ANIMAL is a bird}
+        \begin{itemize}
+          \item \sout{ANIMAL has feathers (F1)} OR (ANIMAL flies AND \sout{ANIMAL lays eggs (F2)})
+        \end{itemize}
+      \item \sout{ANIMAL does not fly (F3)}
+      \item \sout{ANIMAL swims (F5)}
+    \end{itemize}
+  \item Albatross (False)
+    \begin{itemize}
+      \item \sout{ANIMAL is a bird}
+        \begin{itemize}
+          \item \sout{ANIMAL has feathers (F1)} OR (ANIMAL flies AND \sout{ANIMAL lays eggs (F2)})
+        \end{itemize}
+      \item ANIMAL flies well
+    \end{itemize}
+\end{enumerate}
+
+(R3 AND R4) before R13, R14, R15 for satisfying query (R3 OR R4). \\
+
+The result is NOT peculiar because Splashy have the characteristics form both Ostrich and Penguin. Since we started from our goal state to inital state, however, both path can lead us to the initial state.
+
+\section {Problem}
+\begin{enumerate}[1. ] % (a), (b), (c), ...
+  \item R1: $\text{Like(x1, LA)} \rightarrow \text{Goodlooking(x1)}$
+  \item R2: $\text{Goodlooking(x2)} \land \text{In(x2, LA)} \rightarrow \text{Like(x2, LA)}$
+  \item R3: $\text{In(x4, LA)} \rightarrow \text{Love(x4, LA)}$
+  \item R4: $\text{Appear(x5, ET)} \land \text{Female(x5)} \land \text{Love(x5, LA)} \rightarrow \text{Actress(x5)}$
+  \item R5: $\text{Appear(x6, ET)} \rightarrow \text{Love(x6, LA)}$
+  \item R6: $\text{Love(x7, LA)} \rightarrow \text{Greedy(x7)}$
+  \item F1: Female(Jane)
+  \item F2: Like(Jane, LA)
+    \begin{itemize}
+      \item Goodlooking(Jane) \{R1\}
+    \end{itemize}
+  \item F3: Appear(Jane, ET)
+    \begin{itemize}
+      \item Love(Jane, LA) \{R5\}
+        \begin{itemize}
+          \item Actress(Jane) \{F3, F1, R5\}
+          \item Greedy(Jane) \{R6\}
+        \end{itemize}
+    \end{itemize}
+\end{enumerate}
+
+\section {Problem}
+\begin{enumerate}[start=0] % (a), (b), (c), ...
+  \item $\neg \text{Acotr(Jerry)}$
+  \item $\neg \text{RockStar(Jerry)}\lor \neg \text{Millionaire(Jerry)}\lor \text{Actor(Jerry)}[\text{kb} - 1]$
+  \item $\neg \text{Actor(Jerry)}, \text{RockStar(Jerry)}\lor \neg \text{Millionaire(Jerry)}\lor \text{Actor(Jerry)}$
+    \begin{enumerate}[1. ] % (a), (b), (c), ...
+      \item $\text{RockStar(Jerry)}\lor \neg \text{Millionaire(Jerry)}\lor \text{Actor(Jerry)}$[resolution: 0, 1]
+    \end{enumerate}
+  \item $\text{Millionaire(Jerry)}\lor \neg \text{Drives(Jerry, Ferrari)}[\text{kb} - 2]$
+  \item $\text{RockStar(Jerry)}\lor \neg \text{Millionaire(Jerry)}, \text{Millionaire(Jerry)}\lor \neg \text{Drives(Jerry, Ferrari)}$
+    \begin{enumerate}[1. ] % (a), (b), (c), ...
+      \item $\text{RockStar(Jerry)}\lor \neg \text{Drives(Jerry, Ferrari)}$[resolution: 2.1, 3]
+    \end{enumerate}
+  \item $\text{Likes(Jerry, Snakes)}\lor \neg \text{RockStar(Jerry)}[\text{kb} - 3]$
+  \item $\text{RockStar(Jerry)}\lor \neg \text{Drives(Jerry, Ferrari)}, \text{Likes(Jerry, Snakes)}\lor \neg \text{RockStar(Jerry)}$
+    \begin{enumerate}[1. ] % (a), (b), (c), ...
+      \item $\neg \text{Drives(Jerry, Ferrari)}\lor \text{Likes(Jerry, Snakes)}$[resolution: 4.1, 5]
+    \end{enumerate}
+  \item $\text{Drives(Jerry, Ferrari)}, \neg \text{Drives(Jerry, Ferrari)}\lor \text{Likes(Jerry, Snakes)}$
+    \begin{enumerate}[1. ] % (a), (b), (c), ...
+      \item $\text{Likes(Jerry, Snakes)}$
+    \end{enumerate}
+  \item $\neg \text{Likes(Jerry, Snakes)}, \text{Likes(Jerry, Snakes)}$
+\end{enumerate}
+
+We have prove Actor(Jerry) by contradition.
+
+\end{document}
